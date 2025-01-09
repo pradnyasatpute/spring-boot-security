@@ -1,0 +1,11 @@
+package com.itvedant.employee.service;
+
+import org.springframework.stereotype.Service;
+
+import com.itvedant.employee.repository.EmployeeRepository;
+
+@Service
+public class EmployeeService {
+	private EmployeeRepository employeeRepository;
+	
+}

@@ -1,0 +1,26 @@
+package com.ps.tourpackage.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ps.tourpackage.dao.AddTourDAO;
+import com.ps.tourpackage.entity.TourPackage;
+import com.ps.tourpackage.repository.TourRepository;
+
+@Service
+public class TourService {
+	@Autowired
+	private TourRepository tourRepository;
+	
+	public TourPackage create(AddTourDAO addTourDAO) {
+		TourPackage tourPackage = new TourPackage();
+		tourPackage.setPackageName(addTourDAO.getPackageName());
+		tourPackage.setDescription(addTourDAO.getDescription());
+		tourPackage.setDestination(addTourDAO.getDestination());
+		tourPackage.setDuration(addTourDAO.getDuration());
+		tourPackage.setPricePerPerson(addTourDAO.getPricePerPerson());
+		
+		this.tourRepository.save(tourPackage);
+		return tourPackage;
+	}
+}

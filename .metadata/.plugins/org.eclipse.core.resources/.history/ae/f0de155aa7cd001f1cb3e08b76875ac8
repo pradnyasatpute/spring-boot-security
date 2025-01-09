@@ -1,0 +1,5 @@
+package com.ps.tourpackage.entity;
+
+public class TourPackage {
+
+}

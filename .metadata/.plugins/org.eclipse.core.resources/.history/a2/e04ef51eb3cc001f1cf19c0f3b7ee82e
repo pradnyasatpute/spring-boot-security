@@ -1,0 +1,13 @@
+package com.ps.spring_boot_call_enabled_app;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class VoiceCall1Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(VoiceCall1Application.class, args);
+	}
+
+}

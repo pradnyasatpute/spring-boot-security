@@ -1,0 +1,25 @@
+package com.itvedant.employee.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.itvedant.employee.dao.AddEmpDAO;
+import com.itvedant.employee.entity.Employee;
+import com.itvedant.employee.repository.EmployeeRepository;
+
+@Service
+public class EmployeeService {
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	public Employee createEmp(AddEmpDAO addEmpDAO) {
+		Employee employee = new Employee();
+		
+		employee.setName(addEmpDAO.getName());
+		employee.setDepartment(addEmpDAO.getDepartment());
+		employee.setSalary(addEmpDAO.getSalary());
+		
+		this.employeeRepository.save(employee);
+		return employee;
+	}
+}

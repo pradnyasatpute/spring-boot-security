@@ -1,0 +1,21 @@
+package com.itvedant.book.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.itvedant.book.dao.AddBookDAO;
+import com.itvedant.book.service.BookService;
+
+@Controller
+@RequestMapping("/books")
+public class BookController {
+	@Autowired
+	private BookService bookService;
+	@PostMapping("")
+	public ResponseEntity<?> create(AddBookDAO addBookDAO){
+		return ResponseEntity.ok(this.bookService.create(addBookDAO));
+	}
+}

@@ -1,0 +1,9 @@
+package com.ps.employeeAddress.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ps.employeeAddress.entity.EmployeeAddress;
+
+public interface AddressRepository extends JpaRepository<EmployeeAddress, Integer> {
+
+}

@@ -1,0 +1,24 @@
+package com.ps.employeeAddress.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ps.employeeAddress.dao.AddDAO;
+import com.ps.employeeAddress.entity.EmployeeAddress;
+import com.ps.employeeAddress.repository.AddressRepository;
+
+@Service
+public class AddressService {
+	@Autowired
+	private AddressRepository addressRepository;
+	
+	public EmployeeAddress createAddress(AddDAO addDAO) {
+		EmployeeAddress employeeAddress = new EmployeeAddress();
+		employeeAddress.setCity(addDAO.getCity());
+		employeeAddress.setState(addDAO.getState());
+		employeeAddress.setCountry(addDAO.getCountry());
+		
+		this.addressRepository.save(employeeAddress);
+		return employeeAddress;
+	}
+}

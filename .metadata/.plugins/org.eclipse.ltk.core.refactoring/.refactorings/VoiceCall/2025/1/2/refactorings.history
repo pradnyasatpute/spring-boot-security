@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;VoiceCall/src/main/java/com/ps/spring_boot_call_enabled_ap&apos; to &apos;spring_boot_call_enabled_app&apos;" description="Rename resource &apos;spring_boot_call_enabled_ap&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/com/ps/spring_boot_call_enabled_ap" name="spring_boot_call_enabled_app" stamp="1736225235361" updateReferences="true"/>
+</session>

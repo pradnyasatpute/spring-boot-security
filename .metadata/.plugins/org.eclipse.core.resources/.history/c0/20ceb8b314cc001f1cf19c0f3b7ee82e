@@ -1,0 +1,5 @@
+package com.itvedant.employee.repository;
+
+public class EmployeeRepository {
+
+}
