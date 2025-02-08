@@ -1,7 +1,0 @@
-package com.ps.tourpackage.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface TourRepository extends JpaRepository<T, ID> {
-
-}

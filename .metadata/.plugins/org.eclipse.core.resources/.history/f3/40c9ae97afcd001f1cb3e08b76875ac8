@@ -1,5 +1,0 @@
-package com.ps.gamestop.exception;
-
-public class StorageException {
-
-}

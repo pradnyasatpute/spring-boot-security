@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -117,5 +119,22 @@ public class ProductService {
 			throw new StorageException("File couldn't be saved");
 		}
 		return "File Stored !!!";
+	}
+	
+	public Resource loadAsResource(String fileName) {
+		Path file=this.rootLocation.resolve(fileName);
+		
+		try {
+			Resource resource = new UrlResource(file.toUri());
+			
+			if(resource.exists() && resource.isReadable()) {
+				return resource;
+			}
+			else {
+				throw new StorageException("File couldn't read");
+			}
+		} catch (Exception e) {
+			throw new StorageException("File couldn't read");
+		}
 	}
 }

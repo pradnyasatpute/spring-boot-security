@@ -1,5 +1,0 @@
-package com.ps.tourpackage.exception;
-
-public class StorageException {
-
-}

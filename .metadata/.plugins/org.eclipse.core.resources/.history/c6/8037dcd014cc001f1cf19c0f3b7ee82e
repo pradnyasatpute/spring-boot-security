@@ -1,5 +1,0 @@
-package com.itvedant.employee.repository;
-
-public interface EmployeeRepository {
-
-}

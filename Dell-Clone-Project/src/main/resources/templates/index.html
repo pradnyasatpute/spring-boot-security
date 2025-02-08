@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dell Clone - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+        }
+        .navbar {
+            background-color: #141414;
+        }
+        .card {
+            background-color: #282828;
+            color: white;
+            border-radius: 10px;
+        }
+        .card img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #0071dc;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Dell Clone</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2 class="text-center">Product List</h2>
+        <div class="row">
+            <div class="col-md-4" th:each="product : ${products}">
+                <div class="card">
+                    <img th:src="${product.imageUrl}" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.name}"></h5>
+                        <p class="card-text" th:text="${product.description}"></p>
+                        <p class="card-text">$<span th:text="${product.price}"></span></p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

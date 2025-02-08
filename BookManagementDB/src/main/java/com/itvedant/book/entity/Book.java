@@ -13,6 +13,15 @@ public class Book {
 	private String book_name;
 	private String author;
 	private Float price;
+	
+	private String imageUrl;
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	public Integer getId() {
 		return id;
 	}

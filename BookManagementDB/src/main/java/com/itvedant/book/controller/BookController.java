@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itvedant.book.dao.AddBookDAO;
 import com.itvedant.book.dao.UpdateDAO;
@@ -39,6 +41,10 @@ public class BookController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> del(@PathVariable Integer id){
 		return ResponseEntity.ok(this.bookService.delBook(id));
+	}
+	@PostMapping("/{id}/upload")
+	public ResponseEntity<?> fileUpload(@PathVariable Integer id, @RequestParam("file") MultipartFile file){
+		return ResponseEntity.ok(this.bookService.storeFile(id, file));
 	}
 	
 }

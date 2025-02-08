@@ -1,6 +1,8 @@
 package com.ps.gamestop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,5 +47,10 @@ public class ProductController {
 	@PostMapping("/{id}/upload")
 	public ResponseEntity<?> uploadFile(@PathVariable Integer id,@RequestParam("file") MultipartFile file){
 		return ResponseEntity.ok(this.productService.storeFile(id, file));
+	}
+	@GetMapping("/download/{fileName}")
+	public ResponseEntity<?> download(@PathVariable String fileName){
+		Resource resource = this.productService.loadAsResource(fileName);
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,"attachment; fileName=\"" +fileName+ "\"").body(resource);
 	}
 }
