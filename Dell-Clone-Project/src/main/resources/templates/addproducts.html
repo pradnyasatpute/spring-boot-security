@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Lenovo Admin Dashboard</title>
+	<link th:href="@{https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css}" rel="stylesheet" />
+	<link th:href="@{css/styles.css}" rel="stylesheet" />
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css}" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<!-- <a class="navbar-brand ps-3" href="index.html">Lenovo</a> -->
+		<a class="navbar-brand ps-3 logo" th:href="@{/}">
+			<img th:src="@{/assets/img/logo.jfif}" alt="" srcset="" /></a>
+
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+			<i class="fas fa-bars"></i>
+		</button>
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+					aria-describedby="btnNavbarSearch" />
+				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+					<li><a class="dropdown-item" href="#!">Settings</a></li>
+					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
+					<li>
+						<hr class="dropdown-divider" />
+					</li>
+					<li><a class="dropdown-item" href="#!">Logout</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<!-- <div class="sb-sidenav-menu-heading">Core</div> -->
+						<a class="nav-link" th:href="@{/}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div>
+							Dashboard
+						</a>
+						<a class="nav-link" href="#">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div>
+							Products
+						</a>
+						<a class="nav-link" th:href="@{/addproducts}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div>
+							ADD Products
+						</a>
+						<a class="nav-link" th:href="@{prolist}">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-chart-area"></i>
+							</div>
+							Products List
+						</a>
+						<a class="nav-link" href="tables.html">
+							<div class="sb-nav-link-icon"><i class="bi bi-laptop"></i></div>
+							About Lenovo
+						</a>
+					</div>
+				</div>
+				<div class="sb-sidenav-footer">
+					<div class="small">Logged in as:</div>
+					Start Bootstrap
+				</div>
+			</nav>
+		</div>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid" px-4>
+					<div class="main-panel">
+						<div class="content-wrapper">
+							<div class="page-header">
+								<h3 class="page-title">
+									Add Products
+								</h3>
+							</div>
+							<div class="row">
+								<div class="col-12 grid-margin stretch-card">
+									<div class="card">
+										<div class="card-body">
+											<form method="POST" th:action="@{/addProduct}" th:object="${myproduct}"
+												enctype="multipart/form-data" name="addproductform"
+												class='needs-validation' novalidate id="contracts_form">
+												<!-- SECTION 1 START -->
+
+
+
+												<h5 class="card-title" style="font-weight: 800;color: #1d6fa5;">Add New
+													Products</h5>
+												<div id="personal_detail">
+													<div class="row form-group">
+
+														<input type="hidden" name="id" th:field="*{id}">
+														<div class="col">
+															<label for="productCategory">Product Category</label>
+															<select class="form-control js-example-basic-single"
+																th:field="*{productCategory}" name="productCategory"
+																id="documenttype" required>
+																<option value="">Select Category</option>
+																<option value="Laptop">Laptop</option>
+																<option value="Desktop">Desktop</option>
+																<option value="Tablet">Tablet</option>
+																<option value="Monitors">Monitors</option>
+																<option value="Accessories & Software">Accessories &
+																	Software</option>
+																<option value="Gaming">Gaming</option>
+															</select>
+														</div>
+														<div class="col">
+															<label for="productName">Product Name</label>
+															<input type="text" id="productName"
+																th:field="*{productName}" class="form-control"
+																placeholder="Enter Product Name" name="productName"
+																required />
+														</div>
+														<div class="col">
+															<label for="launchDate">Product Launch Date</label>
+															<input id="launchDate" th:field="*{launchDate}"
+																name="launchDate" class="date-picker form-control"
+																placeholder="DD-MM-YYYY" type="date" required>
+														</div>
+													</div>
+													<div class="row form-group">
+														<div class="col">
+															<label for="description">Desription</label>
+															<textarea class="form-control" th:field="*{description}"
+																placeholder="Write Description here"
+																id="floatingTextarea"></textarea>
+														</div>
+													</div>
+													<div class="row form-group">
+														<div class="col-md-2">
+															<label for="price">Price</label>
+															<input id="price" th:field="*{price}" name="price"
+																class=" form-control" placeholder="Enter Price" type=""
+																required>
+														</div>
+													</div>
+
+													<!-- File Upload Field -->
+													<div class="row form-group">
+														<div class="col">
+															<label for="file">Upload Product Image</label>
+															<input type="file" id="file" name="file"
+																class="form-control" required>
+														</div>
+													</div>
+												</div>
+												<hr style="margin-top:20px !important; ">
+												<div class="mt-2 text-right">
+													<button type="reset" class="btn btn-danger col-md-2"> Reset
+													</button>
+													<button type="submit" class="btn btn-success col-md-2"> Submit
+													</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</main>
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Copyright &copy; Lenovo 2025</div>
+						<div>
+							<a href="#">Privacy Policy</a>
+							&middot;
+							<a href="#">Terms &amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script th:src="@{js/scripts.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{assets/demo/chart-area-demo.js}"></script>
+	<script th:src="@{assets/demo/chart-bar-demo.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script th:src="@{js/datatables-simple-demo.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<!-- hnsss -->
+
+<style>
+	label {
+		font-weight: 600;
+	}
+
+	.row {
+		margin-right: 20px;
+	}
+
+	/* Form Padding Style */
+	.form-control,
+	.select2-container--default .select2-selection--single {
+		padding: 5px 0.375rem !important;
+	}
+
+	.form-group {
+		margin-bottom: 12px !important;
+	}
+
+	.btn {
+		width: 105px !important;
+	}
+
+	.card .card-body {
+		padding: 15px 15px;
+	}
+
+	/* Form Padding Style */
+
+	/* Form Validation Error Style */
+	label.error {
+		display: block;
+		width: 100%;
+		color: red;
+	}
+
+	.card-title {
+		font-size: 16px;
+		font-weight: 500;
+		margin-bottom: 18px !important;
+		margin-top: 2px !important;
+	}
+
+	hr {
+		margin-bottom: 20px !important;
+	}
+
+	element.style {
+		margin-top: 20px !important;
+	}
+
+	/* Form Validation Error Style */
+</style>
+
+<!-- content-wrapper ends -->
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.js"></script> -->
+<!-- <script>
+        $().ready(function() {
+
+            $("#onboarding_form").validate({
+                ignore: [],
+                rules: {
+                    firstname: "required",
+                    // middlename: "required",
+                    lastname: "required",
+                    gender: {
+                        required: true
+                    },
+                },
+                // in 'messages' user have to specify message as per rules
+                messages: {
+                    firstname: " Please enter your firstname",
+                    // middlename: " Please enter your middlename",
+                    lastname: " Please enter your lastname",
+                    gender: {
+                        required: "Please Select Budget Line."
+                    },
+                }
+
+            });
+
+        });
+    </script> -->
+
+<!-- Full Name Auto Populate Script Start -->
+<!--  <script>
+        $("#fullname,#firstname,#middlename,#lastname").keyup(function() {
+            var first = ($("#firstname").val()).replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').replace(/\d+/g, '');
+            var middle = ($("#middlename").val()).replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').replace(/\d+/g, '');
+            var last = ($("#lastname").val()).replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').replace(/\d+/g, '');
+
+            var fullname = first + " " + middle + " " + last;
+            $("#fullname").val(fullname);
+        });
+    </script> -->
+<!-- Full Name Auto Populate Script End -->
+
+<!-- Select 2 Script - Weeklyoff Start -->
+
+<!-- JavaScript for disabling form submissions if there are invalid fields --> 
+ 
+
+<!-- JavaScript for disabling form submissions if there are invalid fields -->
+<script>
+	// Self-executing function
+	(function () {
+		"use strict";
+		window.addEventListener(
+			"load",
+			function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName("needs-validation");
+
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener(
+						"submit",
+						function (event) {
+							if (form.checkValidity() === false) {
+								event.preventDefault();
+								event.stopPropagation();
+							}
+							form.classList.add("was-validated");
+						},
+						false
+					);
+				});
+			},
+			false
+		);
+	})();
+</script>
+</div>

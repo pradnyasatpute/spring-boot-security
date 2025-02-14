@@ -10,9 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 @Configuration
 @EnableWebSecurity
-public class MyWebSecurity{
+public class MyWebSecurity {
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.inMemoryAuthentication()
@@ -29,7 +30,7 @@ public class MyWebSecurity{
 //	}
 	@Bean
 	public AuthenticationProvider myAuthenticationProvider() {
-		DaoAuthenticationProvider daoProvider=new DaoAuthenticationProvider();
+		DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
 		daoProvider.setUserDetailsService(mySetUserDetailsService());
 		daoProvider.setPasswordEncoder(mySetPasswordEncoder());
 		return daoProvider;
@@ -44,25 +45,20 @@ public class MyWebSecurity{
 	public UserDetailsService mySetUserDetailsService() {
 		return new MySetUserDetailsServiceNew();
 	}
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	  
-	   http.authorizeRequests()
-	  .requestMatchers("/home","/registerCustomer","/403").hasAnyAuthority("USER","ADMIN")
-	  .requestMatchers("/deleteCustomer/**","/updateCustomerForm/**").hasAuthority("ADMIN")
-	  .anyRequest().authenticated()
-	  .and()
-	  .formLogin().loginProcessingUrl("/login").successForwardUrl("/registerCustomer").permitAll()
-	  .and()
-	  .logout().logoutSuccessUrl("/login").permitAll()
-	  .and()
-	  .exceptionHandling().accessDeniedPage("/403")
-	  .and()
-	  .cors().and().csrf().disable();
-	   
-	   http.authenticationProvider(myAuthenticationProvider());
-	   
-	    return http.build();
+
+		http.authorizeRequests().requestMatchers("/home", "/registerCustomer", "/403").hasAnyAuthority("USER", "ADMIN")
+				.requestMatchers("/deleteCustomer/**", "/updateCustomerForm/**").hasAuthority("ADMIN").anyRequest()
+				.authenticated().and().formLogin().loginProcessingUrl("/login").successForwardUrl("/registerCustomer")
+				.permitAll().and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling()
+				.accessDeniedPage("/403").and().cors().and().csrf().disable();
+
+		
+		
+		http.authenticationProvider(myAuthenticationProvider());
+
+		return http.build();
 	}
-	}
+}

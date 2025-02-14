@@ -3,8 +3,13 @@ package com.ps.application.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.ps.application.config.UserWithNoPassword;
 import com.ps.application.entity.Customer;
 import com.ps.application.repository.CustomerRepository;
 
@@ -42,7 +47,24 @@ public class CustomerService {
 		 customerRepository.delete(customer);
 		
 	}
+
+	public List<Customer> getSortedCustomers(String field) {
+		return customerRepository.findAll(Sort.by(field));
+	}
+
+	public Page<Customer> getCustomersByPagination(int pageSize,int pageNo) {
+		Pageable pageable= PageRequest.of(pageNo, pageSize);
+		return customerRepository.findAll(pageable);
+
+	}
+
+	public Page<Customer> getCustomersByPaginationAndSorting(int pageSize, int pageNo, String field) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(field));
+	    return customerRepository.findAll(pageable);
+	}
 	
-	
+	public List<UserWithNoPassword> getAllCustomersWithoutPassword() {
+        return customerRepository.findAllBy();
+    }
 
 }

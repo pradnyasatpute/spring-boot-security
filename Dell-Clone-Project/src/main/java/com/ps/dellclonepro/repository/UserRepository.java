@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ps.dellclonepro.entity.User;
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-	public List<User> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Integer> {
+	public User findByUsername(String u);
 }
